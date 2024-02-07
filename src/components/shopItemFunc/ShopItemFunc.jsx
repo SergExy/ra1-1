@@ -10,6 +10,15 @@ const ShopItemFunc = ({ item }) => {
     currency,
   } = item;
 
+  let validPrice;
+  const priceParts = price.toString().split('.');
+
+  if (priceParts.length < 2) {
+    validPrice = price + '.00';
+  } else {
+    validPrice = priceParts[0] + '.' + priceParts[1].toString().padEnd(2, '0');
+  }
+
   return (
     <div className="main-content">
       <h2>{brand}</h2>
@@ -21,7 +30,7 @@ const ShopItemFunc = ({ item }) => {
       <div className="highlight-window mobile"><div className="highlight-overlay"></div></div>
       <div className="divider"></div>
       <div className="purchase-info">
-        <div className="price">{currency + price}</div>
+        <div className="price">{currency + validPrice}</div>
         <button>Добавить в корзину</button>
       </div>
     </div>
